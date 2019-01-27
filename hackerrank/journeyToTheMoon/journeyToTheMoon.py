@@ -1,15 +1,22 @@
 from graph import UndirectedGraph
 
-def subset_size(graph, vertex, counter = 0):
+def subset_size(graph, vertex):
     '''
-    A recursive implementation of DFS to count the number of elements in the disjoint subset which 'vertex' belongs to.
+    An iterative implementation of DFS to count the number of elements in the disjoint subset which 'vertex' belongs to.
     '''
-    if not graph.marked[vertex]:
-        graph.marked[vertex] = True
-        counter += 1
-        for adjacent_vertex in graph.adj(vertex):
-            counter = subset_size(graph, adjacent_vertex, counter)
+    stack = [vertex]
+    counter = 0
+
+    while len(stack) != 0:
+        current_vertex = stack.pop()
+        if not graph.marked[current_vertex]:
+            graph.marked[current_vertex] = True
+            counter += 1
+            for adjacent_vertex in graph.adj(current_vertex):
+                stack.append(adjacent_vertex)
+
     return counter
+
 
 def disjoint_subset_sizes(graph):
     '''
@@ -27,17 +34,22 @@ def disjoint_subset_sizes(graph):
 
 def calculate_number_of_pairs(subset_counts):
     '''
-    A recursive implementation to calculate the number of pairs.
+    An iterative implementation to calculate the number of pairs.
     '''
     if type(subset_counts) is not list:
         raise TypeError("subset_counts must be a list of integers")
 
-    if len(subset_counts) <= 1:
+    if len(subset_counts) == 0:
         return 0
 
-    first_element = subset_counts[0]
-    remaining_elements = subset_counts[1:]
-    return first_element*sum(remaining_elements) + calculate_number_of_pairs(remaining_elements)
+    result = 0
+    summation_so_far = subset_counts[0]
+
+    for count in subset_counts[1:]:
+        result += summation_so_far * count
+        summation_so_far += count
+
+    return result
 
 
 def journeyToMoon(n, astronaut):
