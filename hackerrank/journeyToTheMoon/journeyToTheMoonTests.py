@@ -2,7 +2,7 @@ import unittest
 from io import StringIO
 import numpy as np
 
-from journeyToTheMoon import journeyToMoon, calculate_number_of_pairs, disjoint_subset_sizes
+from journeyToTheMoon import journeyToMoon, number_of_pairs, disjoint_subset_sizes
 from graph import UndirectedGraph
 
 class TestJourneyToMoon(unittest.TestCase):
@@ -28,16 +28,16 @@ class TestJourneyToMoon(unittest.TestCase):
         self.get_big_test_data()
         self.assertEqual(journeyToMoon(self.big_num_vertices, self.big_astronaut), 4527147)
 
-class TestCalculateNumberOfPairs(unittest.TestCase):
+class TestNumberOfPairs(unittest.TestCase):
     def test_calculation(self):
-        self.assertEqual(calculate_number_of_pairs([3, 2]), 6)
-        self.assertEqual(calculate_number_of_pairs([3, 2, 3]), 21)
-        self.assertEqual(calculate_number_of_pairs([3]), 0)
-        self.assertEqual(calculate_number_of_pairs([]), 0)
+        self.assertEqual(number_of_pairs([3, 2]), 6)
+        self.assertEqual(number_of_pairs([3, 2, 3]), 21)
+        self.assertEqual(number_of_pairs([3]), 0)
+        self.assertEqual(number_of_pairs([]), 0)
 
     def test_exception(self):
         with self.assertRaises(TypeError):
-            result = calculate_number_of_pairs(None)
+            result = number_of_pairs(None)
             
 class TestGetSubsetCounts(unittest.TestCase):
     def test_calculation(self):

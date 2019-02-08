@@ -1,4 +1,12 @@
+'''
+A module that implements a class to represent an undirected graph.
+'''
+
 class UndirectedGraph:
+    '''
+    A class representing an undirected graph.
+    Each vertex is represented by an integer from zero to the number of vertices minus one.
+    '''
     def __init__(self, num_vertices, edges):
 
         if num_vertices is None:
@@ -36,10 +44,16 @@ class UndirectedGraph:
             self._graph[w].append(v)
 
     def adj(self, vertex):
+        '''
+        Return the list of adjacent vertices to the given vertex.
+        '''
         return self._graph[vertex]
 
 
 class AdjacencyListGraphIterator:
+    '''
+    A class to represent an iterator object for a graph with the adjacency list implementation.
+    '''
     def __init__(self, num_vertices):
         self.index = 0
         self.num_vertices = num_vertices

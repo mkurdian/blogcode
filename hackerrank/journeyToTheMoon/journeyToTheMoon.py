@@ -1,3 +1,8 @@
+'''
+A Solution to Journey to the Moon challenge on Hackerrank.
+https://www.hackerrank.com/challenges/journey-to-the-moon/problem
+'''
+
 from graph import UndirectedGraph
 
 def subset_size(graph, vertex):
@@ -6,6 +11,9 @@ def subset_size(graph, vertex):
     '''
     stack = [vertex]
     counter = 0
+
+    if graph.marked[vertex]:
+        return counter
 
     while len(stack) != 0:
         current_vertex = stack.pop()
@@ -23,16 +31,16 @@ def disjoint_subset_sizes(graph):
     A function to obtain the disjoint subset sizes from a graph.
     '''
     result = []
+
     for vertex in graph:
-        if not graph.marked[vertex]:
-            subset_counter = subset_size(graph, vertex)
-            if subset_counter > 0:
-                result.append(subset_counter)
+        subset_counter = subset_size(graph, vertex)
+        if subset_counter > 0:
+            result.append(subset_counter)
 
     return result
 
 
-def calculate_number_of_pairs(subset_counts):
+def number_of_pairs(subset_counts):
     '''
     An iterative implementation to calculate the number of pairs.
     '''
@@ -60,4 +68,4 @@ def journeyToMoon(n, astronaut):
     graph = UndirectedGraph(n, astronaut)
     subset_sizes = disjoint_subset_sizes(graph)
 
-    return calculate_number_of_pairs(subset_sizes)
+    return number_of_pairs(subset_sizes)
